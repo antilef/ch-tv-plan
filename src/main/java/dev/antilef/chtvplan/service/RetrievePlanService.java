@@ -9,8 +9,6 @@ import dev.antilef.chtvplan.exception.ProductDetailNotFoundException;
 import dev.antilef.chtvplan.repository.DestinyPlanRepository;
 import dev.antilef.chtvplan.repository.PropertiesRepository;
 import dev.antilef.chtvplan.rest.InformationGetter;
-import dev.antilef.chtvplan.rest.dao.CodePlanListTO;
-import dev.antilef.chtvplan.rest.dao.PlanREST;
 import dev.antilef.chtvplan.rest.dao.RequestedCodePlanResponseTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

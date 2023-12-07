@@ -62,7 +62,7 @@ public class RetrievePlanService {
         response.setPlanActualDescription(productDetail
                 .getDescription(), property);
 
-        RequestedCodePlanResponseTO contract = getRequestedCodePlanResponseTO(productDetail);
+        RequestedCodePlanResponseTO contract = informationGetter.additionalContract(productDetail.getPlanId());
 
         if (contract.isValid()) {
             String code = contract.getCode();
@@ -75,9 +75,9 @@ public class RetrievePlanService {
         if(userInfo1 != null){
             String accountType = userInfo1.getAccountType();
             if (accountType.equals("2") || accountType.equals("3") || accountType.equals("4")) {
-                response.setPlanType("CuentaExacta");
+                response.setPlanType("ExactAccount");
             } else {
-                response.setPlanType("PostPago");
+                response.setPlanType("PostBilling");
             }
         }
         response.setCode(HttpStatus.OK);
@@ -87,15 +87,8 @@ public class RetrievePlanService {
 
     }
 
-    private RequestedCodePlanResponseTO getRequestedCodePlanResponseTO(ProductDetail productDetail) {
-        CodePlanListTO listaPlanesIn = new CodePlanListTO();
-        PlanREST planTo = new PlanREST();
-        planTo.setPlanCode(productDetail.getPlanId());
-        listaPlanesIn.add(planTo);
-        return informationGetter.additionalContract(listaPlanesIn);
-    }
 
-    private List<Plan> getPlans(List<PlanType> planTypeList) {
+    public  List<Plan> getPlans(List<PlanType> planTypeList) {
         List<Plan> planDTOList = new ArrayList<>();
 
         if(planTypeList == null || planTypeList.isEmpty()){

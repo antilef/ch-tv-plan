@@ -16,4 +16,4 @@ otros pequeños servicio y acceso de base de datos con el fin de orquestar una l
 simple y reducida.
 
 ## Notes
-docker run --name postgres -p 5432:5432 -e POSTGRES_DB=tv-db -e POSTGRES_PASSWORD=antilef -e POSTGRES_USER=antilef -d postgres:16
+docker run --name postgres -v /data:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_DB=tv-db -e POSTGRES_PASSWORD=antilef -e POSTGRES_USER=antilef -d postgres:16

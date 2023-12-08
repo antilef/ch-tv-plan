@@ -29,7 +29,7 @@ public class RetrievePlanService {
     private final InformationGetter informationGetter;
 
     @Autowired
-    private PropertiesRepository propertiesRepository;
+    private final PropertiesRepository propertiesRepository;
 
     @Autowired
     private final DestinyPlanRepository destinyPlanRepository;

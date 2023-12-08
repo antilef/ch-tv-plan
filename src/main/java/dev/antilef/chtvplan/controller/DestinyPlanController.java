@@ -16,7 +16,7 @@ public class DestinyPlanController {
 
 
     @Autowired
-    private DestinyPlanRepository repo;
+    private final DestinyPlanRepository repo;
 
     public DestinyPlanController(DestinyPlanRepository repo) {
         this.repo = repo;

@@ -10,26 +10,26 @@ import dev.antilef.chtvplan.repository.DestinyPlanRepository;
 import dev.antilef.chtvplan.repository.PropertiesRepository;
 import dev.antilef.chtvplan.rest.InformationGetter;
 import dev.antilef.chtvplan.rest.dao.RequestedCodePlanResponseTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import dev.antilef.chtvplan.utils.Constant;
 import dev.antilef.chtvplan.entity.PlanType;
 import dev.antilef.chtvplan.dto.Plan;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class RetrievePlanService {
 
     @Autowired
     private final InformationGetter informationGetter;
 
     @Autowired
-    private final PropertiesRepository propertiesRepository;
-    Logger logger = LoggerFactory.getLogger(RetrievePlanService.class);
+    private PropertiesRepository propertiesRepository;
 
     @Autowired
     private final DestinyPlanRepository destinyPlanRepository;
@@ -100,10 +100,12 @@ public class RetrievePlanService {
             planDTO.setId(planType.getPlanID());
             planDTO.setName(planType.getPlanName());
 
-            List<DestinyPlan> plan = destinyPlanRepository.findByName(planType.getPlanName());
+            Long id = (long) planType.getPlanID();
 
-            if (!plan.isEmpty()) {
-                Integer fixedCharge = plan.get(0).getFixedCharge();
+            Optional<DestinyPlan> plan = destinyPlanRepository.findById(id);
+
+            if (plan.isPresent()) {
+                Integer fixedCharge = plan.get().getFixedCharge();
                 planDTO.setFixedCharge(fixedCharge);
 
             }

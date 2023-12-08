@@ -22,6 +22,6 @@ public class RetrievePlanResponse {
     private String planActualDescription;
 
     public void setPlanActualDescription(String description, String prop){
-        this.planActualDescription = description.concat(prop);
+        this.planActualDescription = description.concat(" ").concat(prop);
     }
 }

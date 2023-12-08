@@ -4,17 +4,23 @@ import dev.antilef.chtvplan.dto.RetrievePlanRequest;
 import dev.antilef.chtvplan.dto.RetrievePlanResponse;
 import dev.antilef.chtvplan.exception.ProductDetailNotFoundException;
 import dev.antilef.chtvplan.service.RetrievePlanService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
 @RequestMapping("/api/v1")
+@RestController
 public class RetrievePlansController {
 
     @Autowired
-    private final RetrievePlanService retrievePlanService;
+    private RetrievePlanService retrievePlanService;
+
+    Logger logger = LoggerFactory.getLogger(RetrievePlansController.class);
 
     public RetrievePlansController(RetrievePlanService retrievePlanService) {
         this.retrievePlanService = retrievePlanService;
@@ -31,6 +37,7 @@ public class RetrievePlansController {
             response.setMessage("Sorry,has occurred a problem, try later");
 
         }catch(Exception e){
+            logger.info(e.getMessage());
             response = new RetrievePlanResponse();
             response.setCode(HttpStatus.NOT_FOUND);
             response.setMessage("Sorry, try later");

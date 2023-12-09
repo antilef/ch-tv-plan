@@ -1,5 +1,6 @@
 package dev.antilef.chtvplan.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,8 +20,10 @@ public class Property {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "property_value")
     private String value;
 
+    @Column(name = "property_key")
     private String key;
 
 }

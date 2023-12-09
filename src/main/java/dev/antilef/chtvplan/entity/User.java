@@ -1,10 +1,7 @@
 package dev.antilef.chtvplan.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
+@Builder
 public class User implements UserDetails {
 
     @Id

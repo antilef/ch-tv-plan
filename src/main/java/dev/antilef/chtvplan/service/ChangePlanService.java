@@ -101,7 +101,7 @@ public class ChangePlanService {
         Long requestId = Long.parseLong(requestDTO.getRequestedPlanId());
         Optional<DestinyPlan> destinyPlan = destinyPlanRepository.findById(requestId);
         if (destinyPlan.isEmpty()) {
-            logger.error("El plan destino no existe en la tabla cd06, cargo fijo es nulo");
+            logger.error("The destiny plan not exist in offerTable, fixed charge is null");
         } else {
             fixedChargeDestiny = destinyPlan.get().getFixedCharge().toString();
         }
@@ -115,12 +115,7 @@ public class ChangePlanService {
         return result;
 
 
-//        if (!isAvailableCreateTicket(requestDTO)) {
-//            reason = propertiesRepository.getProperty(CPO_TICKET_ABIERTO);
-//            result = new ChangePlanResultFilter(ChangePlanResult.ERROR, reason, cbpID, fixedChargeOrigin, fixedChargeDestiny,
-//                    "TICKET ACTIVO");
-//            return result;
-//        }
+
 //
 //        String isActiveChange = propertiesRepository.getProperty("cpo.activo");
 //        if (!isActiveChange.equals(Constants.CPO_ACTIVE_VALID)) {

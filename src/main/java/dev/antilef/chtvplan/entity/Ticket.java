@@ -19,11 +19,14 @@ public class Ticket {
 
     private String accountId;
 
+    private boolean isOpen;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false ,updatable = false)
     private Date createdAt;
 
 
-
-
+    public boolean isOpen() {
+        return this.isOpen;
+    }
 }

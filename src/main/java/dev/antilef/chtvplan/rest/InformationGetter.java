@@ -60,4 +60,8 @@ public class InformationGetter {
         ui.setAccountType("4");
         return ui;
     }
+
+    public String identifyCaller(String number) {
+        return "string";
+    }
 }

@@ -7,17 +7,13 @@ import dev.antilef.chtvplan.entity.UserInfo;
 import dev.antilef.chtvplan.exception.ProductDetailNotFoundException;
 import dev.antilef.chtvplan.repository.PropertiesRepository;
 import dev.antilef.chtvplan.rest.InformationGetter;
-import dev.antilef.chtvplan.rest.dao.CodePlanListTO;
-import dev.antilef.chtvplan.rest.dao.PlanREST;
 import dev.antilef.chtvplan.rest.dao.RequestedCodePlanResponseTO;
 import dev.antilef.chtvplan.utils.Constant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;

@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FilterRunnerTest {
@@ -18,24 +18,20 @@ public class FilterRunnerTest {
     private FiltersRunner runner;
 
     @Test
-    void testRunUntilNullFilterResult(){
+    void testRunUntilFailedFilterResult(){
 
         TryToChangePlanRequest request = new TryToChangePlanRequest();
 
         List<ChangePlanFilter> filters = new ArrayList<>();
 
-        filters.add(new ChangePlanFilter() {
-            @Override
-            public ChangePlanResultFilter run(TryToChangePlanRequest requestDTO) {
-                return null;
-            }
-        });
+        filters.add(requestDTO -> new ChangePlanResultFilter(ChangePlanResult.FAILED,"reason","1010","10000","10000","SUCCESS"));
 
 
         runner = new FiltersRunner(filters);
         ChangePlanResultFilter result = runner.run(request);
 
-        assertNull(result);
+        assertNotNull(result);
+        assertEquals(ChangePlanResult.FAILED,result.getStatus());
 
     }
 
@@ -45,25 +41,16 @@ public class FilterRunnerTest {
 
         List<ChangePlanFilter> filters = new ArrayList<>();
 
-        filters.add(new ChangePlanFilter() {
-            @Override
-            public ChangePlanResultFilter run(TryToChangePlanRequest requestDTO) {
-                return new ChangePlanResultFilter(ChangePlanResult.SUCCESS,"reason",null,"10000","10000","SUCESS");
-            }
-        });
+        filters.add(requestDTO -> new ChangePlanResultFilter(ChangePlanResult.NEXT,"reason","1010","10000","10000","SUCCESS"));
 
-        filters.add(new ChangePlanFilter() {
-            @Override
-            public ChangePlanResultFilter run(TryToChangePlanRequest requestDTO) {
-                return null;
-            }
-        });
+        filters.add(requestDTO -> new ChangePlanResultFilter(ChangePlanResult.MANUAL,"reason","101","100","100","ERROR"));
 
 
         runner = new FiltersRunner(filters);
         ChangePlanResultFilter result = runner.run(request);
 
-        assertNull(result);
+        assertNotNull(result);
+        assertEquals(ChangePlanResult.MANUAL,result.getStatus());
     }
 
 }
